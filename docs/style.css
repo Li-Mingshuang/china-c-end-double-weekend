@@ -151,10 +151,12 @@ code {
 }
 .rows .row:first-child { border-top: 0; }
 
-.row .brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 7px; }
+.row .brand { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 7px; }
 .row .brand strong { font-size: 15.5px; }
 .row .cat { font-size: 12px; color: var(--ink-3); }
-.row .product { margin: 4px 0 0; font-size: 13px; color: var(--ink-3); }
+.row .product { margin: 0; font-size: 13px; color: var(--ink-3); }
+/* 类别与产品各占一整行，避免被 flex 排成同一行 */
+.row .brand .cat, .row .brand .product { flex: 1 0 100%; margin: 0; }
 
 .badge {
   display: inline-block; padding: 2px 9px; border-radius: 999px;
