@@ -53,6 +53,20 @@
 1. `README.md` 中对应的表格
 2. `data/companies.csv`（字段说明见该文件表头）
 
+**`data/by-industry.md` 和 `docs/data.json` 都是自动生成的，请不要手工编辑。**
+改完 CSV 后，在仓库根目录跑：
+
+```powershell
+# 重新生成 data/by-industry.md 与 docs/data.json
+powershell -ExecutionPolicy Bypass -File tools\build-page.ps1
+
+# 校验页面渲染逻辑（需要 Node）
+node tools\smoke-test.js
+```
+
+如果你新增了公司或产业，还必须同步更新 `tools/build-page.ps1` 顶部的**产业映射**——
+脚本会在公司未被映射、或映射了不存在的公司时打印 `WARN`，请一并修正。
+
 CSV 每一行字段：
 
 ```csv
