@@ -6,6 +6,9 @@
   单一数据源是 data/companies.csv。改数据请只改 CSV，然后重跑本脚本：
     powershell -ExecutionPolicy Bypass -File tools\build-page.ps1
 
+  ⚠️ 这个 .ps1 文件本身必须保存为「UTF-8 带 BOM」。Windows PowerShell 5.1 对无 BOM 的 .ps1
+     会按系统 ANSI 代码页解析，脚本里的中文会变成乱码并直接语法报错。用 VS Code 编辑时
+     请留意右下角编码，别把 BOM 去掉。
   注意：本机是 Windows PowerShell 5.1，写文件必须用 UTF8Encoding($false) 去掉 BOM，
   否则 JSON.parse / fetch 会失败。必须用 [IO.File]::WriteAllText。
 #>
