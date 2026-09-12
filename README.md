@@ -6,7 +6,7 @@
 >
 > 数据截止：**2026-09**。每条记录单独标注时间点，政策会变，**请以劳动合同为准**。
 >
-> 🌐 **网页版（可按产业筛选、可搜索）**：<https://li-mingshuang.github.io/china-c-end-double-weekend/>
+> 🌐 **网页版**：<https://li-mingshuang.github.io/china-c-end-double-weekend/> —— 含状态环形图、**词云**（字号 = 可信度评分）、产业 × 状态热力矩阵，均可点击筛选与搜索。
 
 ---
 
