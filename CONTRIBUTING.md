@@ -62,10 +62,17 @@ powershell -ExecutionPolicy Bypass -File tools\build-page.ps1
 
 # 校验页面渲染逻辑（需要 Node）
 node tools\smoke-test.js
+
+# 可选：用真实 Chrome 检查多个视口宽度下有没有横向溢出（需要本机装了 Chrome / Edge）
+powershell -ExecutionPolicy Bypass -File tools\layout-probe.ps1
 ```
 
 如果你新增了公司或产业，还必须同步更新 `tools/build-page.ps1` 顶部的**产业映射**——
 脚本会在公司未被映射、或映射了不存在的公司时打印 `WARN`，请一并修正。
+
+改动 `docs/` 里的样式或布局时，**请务必跑一次 `layout-probe`**：它会在 320 / 360 / 768 / 1240
+四个视口宽度下打开真实页面，确认没有元素横向溢出，并检查环形图、词云、热力矩阵、产业卡片、
+公司行都按预期数量渲染。只跑 `smoke-test` 是发现不了布局溢出的。
 
 CSV 每一行字段：
 
