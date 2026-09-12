@@ -252,6 +252,7 @@
 | [`docs/`](docs/) | GitHub Pages 网页版（`index.html` / `app.js` / `style.css` / 自动生成的 `data.json`） |
 | [`tools/build-page.ps1`](tools/build-page.ps1) | 从 CSV 生成 `data/by-industry.md` 与 `docs/data.json` |
 | [`tools/smoke-test.js`](tools/smoke-test.js) | 用 Node 跑一遍页面渲染逻辑的冒烟测试 |
+| [`tools/layout-probe.ps1`](tools/layout-probe.ps1) | 用真实 Chrome 在 320/360/768/1240 四个视口下检查横向溢出与组件渲染 |
 
 ## 授权
 
