@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>中国 C 端双休企业清单 · 消费者视角</title>
+<meta name="description" content="面向个人消费者的中国企业里，哪些是双休的。按产业分类，每条附公开证据链接、证据等级与时间戳。">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">消费者视角 · 按产业看</p>
+    <h1>中国 C 端双休企业清单</h1>
+    <p class="sub">
+      换个问法：<strong>你正在消费的这家公司，员工是不是双休？</strong><br>
+      主清单只收录「全公司范围明确双休」且证据达 A 级的企业；其余按证据强度分层展示。
+    </p>
+    <p class="meta">
+      数据截止 <strong id="asof">—</strong> ·
+      <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend">GitHub 仓库</a> ·
+      <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend/blob/main/data/by-industry.md">Markdown 版</a> ·
+      <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend/blob/main/data/companies.csv">CSV</a>
+    </p>
+  </div>
+</header>
+
+<div class="legend-bar">
+  <div class="wrap">
+    <div id="stats" class="stats"></div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <section class="notice">
+    <h2>先读这三句</h2>
+    <ol>
+      <li><strong>「不明」不等于「不是双休」。</strong>它只代表我们<strong>没有找到</strong>达标的公开来源。本清单<strong>不发布证据不足的负面结论</strong>。</li>
+      <li><strong>同一个品牌，门店和你手机里那个 App 可能是两套作息。</strong>门店、餐厅、配送、产线、客服、医院临床岗基本都是排班制；总部研发职能岗才可能是双休。</li>
+      <li><strong>「强制下班」「混合办公」都不等于双休。</strong>前者约束每天的下班时间，后者约束办公地点。<a href="#misread">见下方口径说明</a>。</li>
+    </ol>
+  </section>
+
+  <section class="controls">
+    <input id="q" type="search" placeholder="搜索品牌、产品（例如：奶茶、空调、小红书）" autocomplete="off">
+    <div id="chips" class="chips"></div>
+  </section>
+
+  <p id="count" class="count"></p>
+
+  <div id="list"></div>
+
+  <p id="empty" class="empty" hidden>没有匹配的结果，换个关键词试试。</p>
+
+  <section id="misread" class="prose">
+    <h2>最容易误读的三种口径</h2>
+    <table>
+      <thead><tr><th>说法</th><th>实际约束的是什么</th><th>为什么不能当双休证据</th></tr></thead>
+      <tbody>
+        <tr><td>「强制下班」「到点关灯」「9 点必须走人」（2025 年大疆、美的等）</td><td>每天的下班时间</td><td>约束的是单日工时，不是每周休息天数。同一家公司完全可以「到点下班 + 周六照常上班」</td></tr>
+        <tr><td>「每周居家办公 2 天」「3+2 混合办公」（如携程）</td><td>办公地点</td><td>在家也是上班，与休息天数无关</td></tr>
+        <tr><td>「少开会、禁用 PPT、汇报不超 3 页」（2025 年名创优品）</td><td>内部管理效率</td><td>针对形式主义，不涉及休息天数</td></tr>
+        <tr><td>「四天半工作制」（如乐视）</td><td>另一类制度</td><td>比双休更好，但要单独标注，不与该「双休」混为一谈</td></tr>
+      </tbody>
+    </table>
+    <p class="fine">
+      另外两点：<strong>「未出现在 2021 年取消大小周名单里」既不等于「曾经是大小周」，也不等于「现在是双休」</strong>（百度、腾讯、网易、B 站本来就不是公开的大小周公司）。
+      <strong>「海尔强制双休」是被海尔当日公开否认的传言。</strong>
+    </p>
+  </section>
+
+  <section id="shift" class="prose">
+    <h2>排班制：这些岗位既不是双休，也不是单休</h2>
+    <p>
+      依据《劳动法》第三十九条，无法实行标准工时的岗位可申请<strong>综合计算工时工作制</strong>或<strong>不定时工作制</strong>。
+      下列企业的门店 / 餐厅岗位已有政府批复，法律上就不是标准双休（详见仓库 <code>data/sources.md</code>）：
+    </p>
+    <ul class="tight">
+      <li><strong>肯德基</strong>（重庆，2024-07 渝中区人社局批复特殊工时制度）</li>
+      <li><strong>瑞幸咖啡</strong>（重庆，2025-07-31 渝中区人社局批复特殊工时制度）</li>
+      <li><strong>海底捞</strong>（赣州章贡区，批复不定时工作制 + 综合计算工时工作制）</li>
+      <li><strong>永辉超市</strong>（盐城 2024-04 批复特殊工时；桐城公示综合计算工时制）</li>
+      <li><strong>中国中免</strong>（三亚市内免税店，2024-02 批复不定时 + 综合计算工时）</li>
+      <li><strong>麦当劳</strong>（保定两餐厅，公示的法人行政许可为特殊工时类）</li>
+    </ul>
+    <p class="fine">
+      门店端公开可见的「月休天数」：<strong>古茗</strong>门店招聘写明「月休 2 天」，<strong>李宁</strong>门店写明「月休四天」。
+      另外，<strong>蜜雪冰城、古茗、茶百道、霸王茶姬、沪上阿姨</strong>等门店多由加盟商（常为个体工商户）经营，
+      劳动合同主体是加盟商，公司层面并无统一作息承诺。
+    </p>
+  </section>
+
+  <section class="prose">
+    <h2>这份清单是怎么做的</h2>
+    <ul class="tight">
+      <li><strong>证据分级</strong>：<b>A</b> = 公司公告 / 官方通知 / 官方招聘 JD 写明「双休」/ 政府行政许可批复；<b>B</b> = 主流媒体报道、多个独立员工反馈一致；<b>C</b> = 单一爆料、渠道商或外包方发布的 JD。</li>
+      <li><strong>主清单门槛</strong>：① 直接面向 C 端消费者；② <strong>全公司范围</strong>明确双休（不是个别部门、个别岗位）。只有个别岗位 JD 写明双休的，一律降级为「🔵 岗位级」。</li>
+      <li><strong>承认的局限</strong>：调研只能使用搜索工具，证据来自搜索结果标题与 URL，<strong>未逐页核对正文</strong>；「未找到公开来源」很可能只是检索可见性不足。</li>
+      <li><strong>制度 ≠ 落地</strong>：媒体报道小红书取消大小周时也提示「加班、竞业泛化仍需调整与博弈」，存在<strong>形式上有双休、实际隐形加班</strong>的风险。</li>
+    </ul>
+    <p class="fine">
+      ⚠️ 本页面是公开信息汇编，<strong>不是法律意见，也不构成任何录用承诺</strong>，更<strong>不号召任何抵制或消费行为</strong>。
+      入职前请以<strong>书面 offer 和劳动合同</strong>为准，并确认劳动合同主体是谁。
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>
+      数据源：<a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend/blob/main/data/companies.csv">companies.csv</a>
+      · 页面由 <code>tools/build-page.ps1</code> 自动生成
+      · <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend">仓库</a>
+      · <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend/blob/main/LICENSE">MIT</a>
+    </p>
+    <p class="fine">发现错误欢迎提 Issue / PR —— 纠错优先处理，请附反例证据。</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
