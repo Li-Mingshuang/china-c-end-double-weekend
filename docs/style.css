@@ -184,8 +184,8 @@ code {
   padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
   background: var(--bg); cursor: pointer; transition: background-color .16s ease;
 }
-.mx-head .mx-label { font-size: 11.5px; color: var(--ink-3); cursor: default; background: transparent; border-color: transparent; }
-.mx-label:not(.mx-head .mx-label):hover { background: var(--line); }
+.mx-head .mx-label { font-size: 11.5px; color: var(--ink-3); cursor: default; background: transparent; border-color: transparent; pointer-events: none; }
+.mx-label:hover { background: var(--line); }
 .mx-cell {
   font-family: inherit; font-size: 13px; padding: 8px 4px; text-align: center;
   border: 1px solid var(--line); border-radius: 8px; background: var(--bg);
