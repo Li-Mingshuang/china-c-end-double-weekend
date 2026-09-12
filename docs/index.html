@@ -11,13 +11,13 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">消费者视角 · 按产业看</p>
-    <h1>中国 C 端双休企业清单</h1>
-    <p class="sub">
+    <p class="kicker reveal">消费者视角 · 按产业看</p>
+    <h1 class="reveal">中国 C 端双休企业清单</h1>
+    <p class="sub reveal">
       换个问法：<strong>你正在消费的这家公司，员工是不是双休？</strong><br>
       主清单只收录「全公司范围明确双休」且证据达 A 级的企业；其余按证据强度分层展示。
     </p>
-    <p class="meta">
+    <p class="meta reveal">
       数据截止 <strong id="asof">—</strong> ·
       <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend">GitHub 仓库</a> ·
       <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend/blob/main/data/by-industry.md">Markdown 版</a> ·
@@ -34,7 +34,7 @@
 
 <main class="wrap">
 
-  <section class="notice">
+  <section class="notice reveal">
     <h2>先读这三句</h2>
     <ol>
       <li><strong>「不明」不等于「不是双休」。</strong>它只代表我们<strong>没有找到</strong>达标的公开来源。本清单<strong>不发布证据不足的负面结论</strong>。</li>
@@ -43,8 +43,54 @@
     </ol>
   </section>
 
+  <section class="viz" id="viz">
+    <h2 class="viz-title">一图看懂这 51 家</h2>
+    <div class="viz-grid">
+
+      <div class="card donut-card">
+        <h3>状态分布</h3>
+        <div class="donut-wrap">
+          <div id="donut" class="donut"></div>
+          <ul id="donut-legend" class="donut-legend"></ul>
+        </div>
+        <p class="hint">点击扇区或图例可筛选下方清单。</p>
+      </div>
+
+      <div class="card cloud-card">
+        <h3>词云：越大的字 = 证据越硬</h3>
+        <div class="cloud-tools">
+          <div id="cloud-sort" class="mini-chips">
+            <button class="mini-chip" type="button" data-csort="score" aria-pressed="true">按可信度</button>
+            <button class="mini-chip" type="button" data-csort="industry" aria-pressed="false">按产业</button>
+            <button class="mini-chip" type="button" data-csort="shuffle" aria-pressed="false">洗牌</button>
+          </div>
+        </div>
+        <div id="cloud" class="cloud"></div>
+        <p class="hint">
+          <strong>字号</strong> = 可信度评分（状态权重 + 证据等级），<strong>颜色</strong> = 状态，<strong>透明度</strong> = 证据等级。
+          <br>它<strong>不代表</strong>公司规模、知名度或市值。鼠标悬停看详情，点击跳到下方卡片。
+        </p>
+      </div>
+
+    </div>
+
+    <div class="card matrix-card">
+      <h3>产业 × 状态 热力矩阵</h3>
+      <div id="matrix" class="matrix-scroll"></div>
+      <p class="hint">数字是该产业下的企业数。点格子按状态筛选，点产业名跳到该产业卡片区。</p>
+    </div>
+  </section>
+
   <section class="controls">
-    <input id="q" type="search" placeholder="搜索品牌、产品（例如：奶茶、空调、小红书）" autocomplete="off">
+    <div class="controls-row">
+      <input id="q" type="search" placeholder="搜索品牌、产品（例如：奶茶、空调、小红书）" autocomplete="off">
+      <select id="sort" aria-label="排序方式">
+        <option value="score">按可信度排序</option>
+        <option value="status">按状态排序</option>
+        <option value="name">按名称排序</option>
+        <option value="asof">按时间点排序</option>
+      </select>
+    </div>
     <div id="chips" class="chips"></div>
   </section>
 
@@ -54,7 +100,23 @@
 
   <p id="empty" class="empty" hidden>没有匹配的结果，换个关键词试试。</p>
 
-  <section id="misread" class="prose">
+  <section class="prose reveal">
+    <h2>变化时间线</h2>
+    <p>「双休」在国内是一个<strong>会变的状态</strong>。这张时间线记录公开可查的作息政策变化，方便判断某条结论是否已过时。</p>
+    <ol class="timeline">
+      <li><span class="t">2021-06</span><div><strong>快手</strong>官宣取消「大小周」（7 月 1 日起执行），行业首个。</div></li>
+      <li><span class="t">2021-07</span><div><strong>字节跳动</strong>取消「大小周」（8 月 1 日起）；<strong>美团</strong>（由美团优选先行）7 月 17 日调整为双休；<strong>BOSS直聘</strong>无条件取消且薪资不变。</div></li>
+      <li><span class="t">2021-08</span><div><strong>vivo</strong>官宣自 9 月 13 日起实行<strong>双休工作制</strong>。</div></li>
+      <li><span class="t">2021-11</span><div><strong>格力电器</strong>官宣「取消所有加班，即日起实行双休工作制」（集团级通知）；<strong>字节跳动</strong>推行「1075」。</div></li>
+      <li><span class="t">2022-03</span><div><strong>携程</strong>推行「3+2」混合办公——<em>注意：这是办公地点政策，不减工作日。</em></div></li>
+      <li><span class="t">2023-01</span><div><strong>乐视</strong>实行每周<strong>四天半</strong>工作制。</div></li>
+      <li><span class="t">2025-03</span><div>「反内卷」报道潮：<strong>大疆</strong>被曝 21 点强制下班、<strong>美的</strong>回应 18:20 强制下班、<strong>海尔</strong>否认「强制双休」、<strong>名创优品</strong>与<strong>小鹏</strong>被并列讨论。</div></li>
+      <li><span class="t">2025-04</span><div><strong>小红书</strong>宣布 5 月 1 日起取消员工竞业协议与「大小周」；同期<strong>小米</strong>被曝「日均工时不低于 11.5 小时」。</div></li>
+      <li><span class="t">2026</span><div><strong>长城汽车</strong>正式取消「大小周」，全面落实双休。</div></li>
+    </ol>
+  </section>
+
+  <section id="misread" class="prose reveal">
     <h2>最容易误读的三种口径</h2>
     <table>
       <thead><tr><th>说法</th><th>实际约束的是什么</th><th>为什么不能当双休证据</th></tr></thead>
@@ -62,7 +124,7 @@
         <tr><td>「强制下班」「到点关灯」「9 点必须走人」（2025 年大疆、美的等）</td><td>每天的下班时间</td><td>约束的是单日工时，不是每周休息天数。同一家公司完全可以「到点下班 + 周六照常上班」</td></tr>
         <tr><td>「每周居家办公 2 天」「3+2 混合办公」（如携程）</td><td>办公地点</td><td>在家也是上班，与休息天数无关</td></tr>
         <tr><td>「少开会、禁用 PPT、汇报不超 3 页」（2025 年名创优品）</td><td>内部管理效率</td><td>针对形式主义，不涉及休息天数</td></tr>
-        <tr><td>「四天半工作制」（如乐视）</td><td>另一类制度</td><td>比双休更好，但要单独标注，不与该「双休」混为一谈</td></tr>
+        <tr><td>「四天半工作制」（如乐视）</td><td>另一类制度</td><td>比双休更好，但要单独标注，不与「双休」混为一谈</td></tr>
       </tbody>
     </table>
     <p class="fine">
@@ -71,7 +133,7 @@
     </p>
   </section>
 
-  <section id="shift" class="prose">
+  <section id="shift" class="prose reveal">
     <h2>排班制：这些岗位既不是双休，也不是单休</h2>
     <p>
       依据《劳动法》第三十九条，无法实行标准工时的岗位可申请<strong>综合计算工时工作制</strong>或<strong>不定时工作制</strong>。
@@ -92,11 +154,12 @@
     </p>
   </section>
 
-  <section class="prose">
+  <section class="prose reveal">
     <h2>这份清单是怎么做的</h2>
     <ul class="tight">
       <li><strong>证据分级</strong>：<b>A</b> = 公司公告 / 官方通知 / 官方招聘 JD 写明「双休」/ 政府行政许可批复；<b>B</b> = 主流媒体报道、多个独立员工反馈一致；<b>C</b> = 单一爆料、渠道商或外包方发布的 JD。</li>
       <li><strong>主清单门槛</strong>：① 直接面向 C 端消费者；② <strong>全公司范围</strong>明确双休（不是个别部门、个别岗位）。只有个别岗位 JD 写明双休的，一律降级为「🔵 岗位级」。</li>
+      <li><strong>词云的「可信度评分」</strong>是怎么算的：状态权重（双休 5 / 部分双休 4 / 岗位级·混合办公·四天半 3 / 排班制 2 / 不明 1）+ 证据等级（A 3 / B 2 / C 1）。评分 2–8 分，线性映射到字号。<strong>这是一个透明的排序规则，不是对公司的评价。</strong></li>
       <li><strong>承认的局限</strong>：调研只能使用搜索工具，证据来自搜索结果标题与 URL，<strong>未逐页核对正文</strong>；「未找到公开来源」很可能只是检索可见性不足。</li>
       <li><strong>制度 ≠ 落地</strong>：媒体报道小红书取消大小周时也提示「加班、竞业泛化仍需调整与博弈」，存在<strong>形式上有双休、实际隐形加班</strong>的风险。</li>
     </ul>
@@ -112,7 +175,7 @@
   <div class="wrap">
     <p>
       数据源：<a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend/blob/main/data/companies.csv">companies.csv</a>
-      · 页面由 <code>tools/build-page.ps1</code> 自动生成
+      · 页面由 <code>tools/build-page.ps1</code> + <code>docs/app.js</code> 生成
       · <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend">仓库</a>
       · <a href="https://github.com/Li-Mingshuang/china-c-end-double-weekend/blob/main/LICENSE">MIT</a>
     </p>
